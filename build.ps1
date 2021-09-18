@@ -1,5 +1,5 @@
 $projectDir = Split-Path -Path $MyInvocation.MyCommand.Path
-$deployDir = Join-Path $projectDir 'jennah';
+$deployDir = Join-Path $projectDir 'docs';
 
 npx rimraf $deployDir
 
