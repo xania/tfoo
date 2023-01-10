@@ -136,10 +136,10 @@ This also applies for derived state, e.g. when a state value is mapped to undefi
 ```typescript
 import { State } from "@xania/state";
 
-const id = new State(1);
-const pokemon = count.map(fetchPokemon);
-
-console.log(pokemon instanceof Promise); // prints true
+async function App() {
+  const id = new State(1);
+  const pokemon = await count.map(fetchPokemon);
+}
 ```
 
 map and bind operators automatically unwrap promises
