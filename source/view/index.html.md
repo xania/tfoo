@@ -18,4 +18,10 @@ meta:
     content: Library for building Reactive UI
 ---
 
+# Getting started
+
+```cmd
+ npm install @xania/view
+```
+
 Hello view
