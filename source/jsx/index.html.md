@@ -4,7 +4,7 @@ title: View
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
 
-logo: xania-logo.png
+logo: jsx/images/xania-logo.png
 
 toc_footers:
   - <a href='https://github.com/xania/view'>Github</a>
@@ -25,3 +25,7 @@ meta:
 ```
 
 Hello view
+
+### benchmark result:
+
+![benchmark results](./images/js-framework-benchmark.png)

@@ -1,6 +1,8 @@
 ---
 title: State
 
+logo: state/images/xania-logo.png
+
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
 
