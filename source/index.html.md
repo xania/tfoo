@@ -2,13 +2,9 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - typescript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -20,226 +16,138 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: State and View libraries by Xania
 ---
+
+# Getting started
+
+```npm
+ npm install @xania/state
+```
+
+To get you started you only need to install the _@xania/state_ package
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+```typescript
+import { State } from "@xania/state";
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+const count = new State(1);
+const subscription = count.subcribe({
+  next(value: number) {
+    console.log(value);
   },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+});
+
+subscription.unsubscribe();
 ```
 
-This endpoint retrieves all kittens.
+Reactivity in _@xania/state_ is in first place about setting up the logic of how the data flows, independent from weither the actual data is available or not. Secondly, when data is available or is changed then the states should be synchronised according to this logic.
 
-### HTTP Request
+We also allow observers to subscribe to the individual state values. These observer are immediately notified on subscription (when state current value is not `undefined`) and on changes of the state values. So when observers are being called we can be sure the state is changed.
 
-`GET http://example.com/api/kittens`
+- monadic state (map, bind)
+- topological sorting
+- asynchronuous data (in progress)
+- scheduling (in progress)
+- batching (in progress)
 
-### Query Parameters
+# State operators
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+prop, map, bind
 
-<aside class="success">
+## Property operator
+
+```typescript
+import { State } from "@xania/state";
+
+const person = new State({ firstName: "ibrahim" });
+const firstName = person.prop("firstName");
+```
+
+## Map operator
+
+```typescript
+import { State } from "@xania/state";
+
+const count = new State(1);
+const isEvent = count.map((x) => x % 2 === 0);
+```
+
+map a state to a derived state.
+
+## Bind operator
+
+```typescript
+import { State } from "@xania/state";
+
+const count = new State(1);
+const even = new State("even");
+const odd = new State("odd");
+
+const choice = count.bind((x) => (x % 2 === 0 ? even : odd));
+```
+
+<!-- <aside class="notice">
+</aside> -->
+
+<!-- <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
-</aside>
+</aside> -->
 
-## Get a Specific Kitten
+# State mutations
 
-```ruby
-require 'kittn'
+```typescript
+function App() {
+  const selection = new State(1);
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  const employee = await selection.map(fetchEmployee);
+  // derived state allowes for mutations
+  employee.prop("firstName").set("Ibrahim");
 }
 ```
 
-This endpoint retrieves a specific kitten.
+All types of state values allow for setting values. Not all these mutation on state `s` are guaranteed to be in sync with others states that `s` derives from. The quarantee that _@xania/state_ provides is that when at the root state value is updated then the dependents are correctly and in most efficient and performant manner are synchronised.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+In some cases this behavior is desirable. It is in this cases the responsibility of the user to propate the updates back to the root state.
 
-### HTTP Request
+# Special case of undefined
 
-`GET http://example.com/kittens/<ID>`
+```typescript
+import { State } from "@xania/state";
 
-### URL Parameters
+const count = new State(1);
+count.subcribe({
+  next(value: number) {
+    console.log(value);
+  },
+});
+// prints: 1
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+count.set(undefined);
+// count value is still 1
 ```
 
-```python
-import kittn
+A new `State` object when no value is provided then `State` as not initialized in which case the observers will not be notified untill non `undefined` value is provided. Also updates with `undefined` value are not process and the previous value is untouched.
+This also applies for derived state, e.g. when a state value is mapped to undefined.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+# Promises
+
+```typescript
+import { State } from "@xania/state";
+
+const id = new State(1);
+const pokemon = count.map(fetchPokemon);
+
+console.log(pokemon instanceof Promise); // prints true
 ```
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
+map and bind operators automatically unwrap promises
 
-```javascript
-const kittn = require('kittn');
+# Motivation
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+## fine-grained state
 
-> The above command returns JSON structured like this:
+# RxJS interop
 
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+# Diamond problem
