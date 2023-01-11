@@ -46,7 +46,7 @@ subscription.unsubscribe();
 
 ![benchmark results](./images/benchmark-results.png)
 
-Reactivity in _@xania/state_ is in first place about setting up the logic of how the data flows, independent from weither the actual data is available or not. Secondly, when data is available or is changed then the states should be synchronised according to this logic.
+Reactivity in _@xania/state_ is in first place about setting up the logic of how the data flows, independent from whether or not the actual data is available. Secondly, when data is available or is changed then the states should be synchronised according to this logic.
 
 We also allow observers to subscribe to the individual state values. These observer are immediately notified on subscription (when state current value is not `undefined`) and on changes of the state values. So when observers are being called we can be sure the state is changed.
 
