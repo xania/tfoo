@@ -4,7 +4,7 @@ title: View
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
 
-logo: jsx/images/xania-logo.png
+logo: /packages/view/images/logo.png
 
 toc_footers:
   - <a href='https://github.com/xania/view'>Github</a>
