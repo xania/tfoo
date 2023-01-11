@@ -1,7 +1,7 @@
 ---
 title: State
 
-logo: /state/images/logo.png
+logo: /packages/state/images/logo.png
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
