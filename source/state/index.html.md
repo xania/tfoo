@@ -1,7 +1,7 @@
 ---
 title: State
 
-logo: state/images/xania-logo.png
+logo: /state/images/logo.png
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - typescript
@@ -23,9 +23,7 @@ meta:
 
 # Getting started
 
-```npm
- npm install @xania/state
-```
+> npm install @xania/state
 
 To get you started you only need to install the _@xania/state_ package
 
@@ -57,6 +55,18 @@ We also allow observers to subscribe to the individual state values. These obser
 - asynchronuous data (in progress)
 - scheduling (in progress)
 - batching (in progress)
+
+# Initialize State
+
+Create new state object
+
+```typescript
+import { State } from "@xania/state";
+
+function App() {
+  const count = new State<number>();
+}
+```
 
 # State operators
 
@@ -154,6 +164,14 @@ map and bind operators automatically unwrap promises
 
 ## fine-grained state
 
-# RxJS interop
+# Interop
+
+## from Observable
+
+## from Promise
+
+## from AsyncTterator
+
+## from Event
 
 # Diamond problem
