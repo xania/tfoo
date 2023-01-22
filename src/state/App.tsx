@@ -21,7 +21,7 @@ export function App() {
           <Main />
         </Outline>
         <footer>
-          <a class="github" href="https://github.com/xania/slate">
+          <a class="github" href="https://github.com/xania/state">
             <span>Github</span>
           </a>
         </footer>
