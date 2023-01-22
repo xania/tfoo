@@ -1,0 +1,98 @@
+﻿:root {
+  --highlight-background: rgba(255, 255, 255, 0);
+  --highlight-width: 0;
+}
+
+.snap {
+  border: 1px solid red;
+}
+
+.image {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.bash {
+  padding: 10px 26px;
+  background-color: rgb(13, 27, 43);
+  &__content {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    line-height: 30px;
+    border-left: 3px solid gray;
+    padding: 0 10px;
+  }
+}
+
+.preformatted {
+  background-color: rgba(0, 0, 0, 0.705);
+  position: relative;
+  font-size: 14px;
+  border-radius: 6px;
+
+  font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New monospace;
+
+  code {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
+  .line {
+    width: 100%;
+    display: inline-block;
+    line-height: 22px;
+    border-left: 6px solid rgba(255, 255, 255, 0);
+    box-sizing: border-box;
+
+    &--highlited {
+      border-left-color: rgb(204, 109, 184);
+      background-color: rgba(8, 46, 102, 0.597);
+    }
+  }
+
+  .line-number {
+    color: rgba(255, 255, 255, 0.493);
+    width: 20px;
+    display: inline-block;
+    text-align: right;
+    padding: 0 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.211);
+    margin-right: 20px;
+  }
+  :global {
+    .keyword {
+      color: rgb(255, 67, 183);
+    }
+    .comment {
+      color: rgb(116, 211, 62);
+    }
+    .function {
+      color: rgb(172, 255, 193);
+    }
+    .number {
+      color: rgb(253, 77, 77);
+    }
+    .literal-property {
+      color: rgb(255, 255, 255);
+    }
+    .parameter {
+      color: rgb(147, 147, 255);
+    }
+
+    .operator {
+      color: rgba(158, 255, 255);
+    }
+    .punctuation {
+      color: rgba(255, 255, 255, 0.389);
+    }
+    .tag {
+      color: rgb(201, 234, 136);
+      font-weight: bold;
+    }
+  }
+}

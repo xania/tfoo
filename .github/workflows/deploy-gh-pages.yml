@@ -30,38 +30,20 @@ jobs:
       contents: write
 
     runs-on: ubuntu-latest
-    env:
-      ruby-version: 2.6
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.ruby-version }}
 
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: gems-${{ runner.os }}-${{ env.ruby-version }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            gems-${{ runner.os }}-${{ env.ruby-version }}-
-            gems-${{ runner.os }}-
-
-      - run: bundle config set deployment 'true'
-      - name: bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-
-      - run: bundle exec middleman build
+      - name: npm ci
+        run: npm ci
+      - run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: "./build"
+          path: "./dist"
 
   # Single deploy job since we're just deploying
   deploy:
