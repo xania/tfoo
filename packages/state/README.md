@@ -12,7 +12,7 @@ Is blazingly fast javascript library for managing reactive state.
 npm install @xania/state
 ```
 
-> [See the docs websie to learn more about how to use @xania/state in your project.](https://xania.github.io/state)
+> [Visit the docs website to learn more about how to use @xania/state in your project.](https://xania.github.io/state)
 
 ```typescript
 import { State } from "@xania/state"
