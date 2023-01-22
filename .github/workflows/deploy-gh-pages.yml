@@ -35,7 +35,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@master
+        run: git submodule init --update
       - name: npm ci
         run: npm ci
       - run: npm run build
