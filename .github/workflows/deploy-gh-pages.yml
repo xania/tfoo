@@ -34,10 +34,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: init submodules
-        run: git submodule init
-      - name: update submodules
-        run: git submodule update
+        with:
+          submodules: recursive
       - name: npm ci
         run: npm ci
       - run: npm run build
