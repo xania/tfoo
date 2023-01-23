@@ -12,6 +12,13 @@ interface MarkdownProps {
   lines?: number[];
 }
 
+interface OutputProps {
+  children: JSX.Children;
+}
+export function Output(props: OutputProps) {
+  return <div class="output">{props.children}</div>;
+}
+
 export function Img(props: { height: number; src: string }) {
   return (
     <div

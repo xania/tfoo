@@ -1,11 +1,14 @@
-import { JsxElement, jsxFactory, render, TemplateNodeType } from "@xania/view";
+import { JsxElement, jsxFactory, TemplateNodeType } from "@xania/view";
 import classes from "../layout.module.scss";
-import { Bash, Img, Javascript } from "../components";
+import { Bash, Img, Javascript, Output } from "../components";
 import { Outline } from "../outline";
 import { Search } from "../search";
 import benchmarkImg from "./assets/benchmark-results.png";
 import { Diamond } from "./demos/diamond";
 import logoUrl from "./assets/logo.webp";
+import * as Rx from "rxjs";
+import { from, fromAsyncIterable } from "@xania/state";
+import { ClickEvents } from "./demos/clicks";
 
 const jsx = jsxFactory({ classes });
 
@@ -17,9 +20,7 @@ export function App() {
         <div class="logo" style={`background-image: url(${logoUrl})`} />
         <h1>Super Docu</h1>
         <Search />
-        <Outline>
-          <Main />
-        </Outline>
+        <Outline>{main}</Outline>
         <footer>
           <a class="github" href="https://github.com/xania/state">
             <span>Github</span>
@@ -43,7 +44,8 @@ function Main() {
       <div class="section">
         <div class="section__content">
           <p>
-            To get you started you only need to install the @xania/state package
+            To get you started you only need to install the{" "}
+            <code>@xania/state</code> package
           </p>
         </div>
         <div class="section__code">
@@ -54,25 +56,19 @@ function Main() {
         <div class="section__content">
           <h1 id={"introduction"}>Introduction</h1>
           <p>
-            @xania/state is intended to be complementary to RxJS and is
-            especially an alternative to BehaviorSubject and it's main goal to
-            provide reactivity for the View library. RxJS is on the other hand
-            better suited for handling events coming from view, e.g. for
-            debounce, async, etc...
+            <code>@xania/state</code> makes working with app state easier. It
+            implements eager (as opposite to lazy) and always shared Observable
+            patterns. This property makes <code>@xania/state</code> better
+            suited for app data but, by design, less applicable for events. On
+            the other hand, <code>RxJS</code> better suited for events and less
+            so for stateful data. <code>@xania/state</code> also provides
+            Interopability with RxJS so transformations from events to state
+            data and back to events are well supported.
           </p>
           <p>
-            Reactivity in @xania/state is in first place about setting up the
-            logic of how the data flows, independent from whether or not the
-            actual data is available. Secondly, when data is available or is
-            changed then the states should be synchronised according to this
-            logic.
-          </p>
-          <p>
-            We also allow observers to subscribe to the individual state values.
-            These observer are immediately notified on subscription (when state
-            current value is not undefined) and on changes of the state values.
-            So when observers are being called we can be sure the state is
-            changed.
+            Reactivity in <code>@xania/state</code> is implemented using an
+            internal graph connecting state and derived states. Observers can
+            subscribe to all state values of the graph.
           </p>
         </div>
         <div class="section__code">
@@ -104,9 +100,12 @@ subscription.unsubscribe();
           <ul>
             <li>monadic state (map, bind)</li>
             <li>topological sorting</li>
-            <li>asynchronuous data (in progress)</li>
-            <li>scheduling (in progress)</li>
-            <li>batching (in progress)</li>
+            <li>asynchronuous data</li>
+            <li>scheduling</li>
+            <li>batching</li>
+            <li>
+              <code>RxJS</code> Interopability
+            </li>
           </ul>
         </div>
         <div class="section__code"></div>
@@ -185,14 +184,14 @@ function App() {
         <div class="section__content">
           <h1 id={"state-mutations"}>State mutations</h1>
           <p>
-            All types of state values allow for update. @xania/state guarantees
-            that when a state value is updated then the dependents are
-            synchronised in most efficient and performant manner. But it does
-            not guarantee that all these mutation on state s will be
-            synchronised with dependencies of s. In case s is derived from a
-            property of a parent state then synchronisation is obvious, but when
-            mapped by a function then after update of s we rely on events
-            handling by user to propagate the value back to it's
+            All types of state values allow for update.{" "}
+            <code>@xania/state</code> guarantees that when a state value is
+            updated then the dependents are synchronised in most efficient and
+            performant manner. But it does not guarantee that all these mutation
+            on state s will be synchronised with dependencies of s. In case s is
+            derived from a property of a parent state then synchronisation is
+            obvious, but when mapped by a function then after update of s we
+            rely on events handling by user to propagate the value back to it's
             parent/dependencies. There are cases where this behavior is
             desirable for example when data in s first need to be verified
             manually send to backend and only after succesful save we propagate
@@ -217,15 +216,24 @@ function App() {
       </div>
       <div class="section">
         <div class="section__content">
-          <h1 id={"interop"}>Interop</h1>
-          <p></p>
+          <h1 id={"rxjs-interop"}>
+            <code>RxJS</code> Interopability
+          </h1>
+          <p>
+            State can be constructed from different types of <i>external</i>{" "}
+            sources. We eagerly subscribe once to the external sources and share
+            the same data to all it's listeners. As a consequence of this the
+            late listeners are not guaranteed to receive all the emitted data.
+          </p>
         </div>
         <div class="section__code"></div>
       </div>
       <div class="section">
         <div class="section__content">
           <h2 id={"create-state"}>from Observable</h2>
-          <p></p>
+          <p>
+            <Output>{from(Rx.timer(0, 1000))}</Output>
+          </p>
         </div>
         <div class="section__code">
           <Javascript lines={[4]}>
@@ -241,7 +249,9 @@ const state = from(timer(0, 1000));
       <div class="section">
         <div class="section__content">
           <h2 id={"create-state"}>from Promise</h2>
-          <p></p>
+          <p>
+            <Output>{from(Promise.resolve(1))}</Output>
+          </p>
         </div>
         <div class="section__code">
           <Javascript lines={[3]}>
@@ -255,30 +265,68 @@ const state = from(Promise.resolve(1));
       </div>
       <div class="section">
         <div class="section__content">
-          <h2 id={"from-async-iterator"}>from AsyncTterator</h2>
-          <p></p>
+          <h2 id={"from-async-iterator"}>from AsyncIterable</h2>
+          <p>
+            <Output>{fromAsyncIterable(asyncGenerator())};</Output>
+          </p>
         </div>
         <div class="section__code">
           <Javascript lines={[3]}>
             {`
 import { from } from "@xania/state";
 
-const state = from([1, 2, 3].values());
-            `}
+fromAsyncIterable(asyncGenerator());
+
+async function* asyncGenerator() {
+  let i = 0;
+  while (true) {
+    yield i++;
+    await delay(1000);
+  }
+}
+`}
           </Javascript>
         </div>
       </div>
       <div class="section">
         <div class="section__content">
           <h2 id={"from-event"}>from Event</h2>
-          <p></p>
+          <p>
+            We belief that accessing the DOM directly from the <i>user code</i>{" "}
+            is not the best approach. It should be ideally a feature of the view
+            library to bind events to state objects. The view library by xania
+            e.g. supports binding of events to observers, which is the case for{" "}
+            <code>State</code> object. Here is an declarative example built on
+            xania JSX view library.
+          </p>
+          <p>
+            <ClickEvents />
+          </p>
+          <p>
+            If we however need to bind to events we can use RxJS's fromEvent as
+            an intermediate step:
+          </p>
+          <Javascript lines={[8]}>{`from(fromEvent(elt,"click"))`}</Javascript>
         </div>
         <div class="section__code">
-          <Javascript lines={[3]}>
+          <Javascript lines={[8]}>
             {`
-import { from } from "@xania/state";
+import { State } from "@xania/state";
+import { jsx } from "@xania/view";
 
-const state = from([1, 2, 3].values());
+export function ClickEvents() {
+  const clicks = new State<EventContext<unknown, MouseEvent>>();
+  return (
+    <div>
+      <button click={clicks}>Click me</button>
+
+      <div>
+        <span>Click x coordinate:</span>
+        <Output>{clicks.map((e) => e.event.clientX)} &nbsp;</Output>
+      </div>
+    </div>
+  );
+}
             `}
           </Javascript>
         </div>
@@ -286,11 +334,6 @@ const state = from([1, 2, 3].values());
       <div class="section">
         <div class="section__content">
           <h1 id={"diamond-problem"}>Diamond problem</h1>
-          {/* <h2>
-            <a href="https://stackblitz.com/edit/vitejs-vite-cxno2b">
-              Live demo
-            </a>
-          </h2> */}
           <Diamond />
         </div>
         <div class="section__code"></div>
@@ -338,4 +381,18 @@ function outline(template: JSX.Element) {
   }
 
   return result;
+}
+
+async function* asyncGenerator() {
+  let i = 0;
+  while (true) {
+    yield i++;
+    await delay(1000);
+  }
+
+  function delay(ts: number) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ts);
+    });
+  }
 }

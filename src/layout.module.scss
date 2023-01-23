@@ -14,11 +14,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .app {
   display: flex;
   box-sizing: border-box;
@@ -93,6 +88,7 @@ code {
     padding: 0 0;
     box-sizing: border-box;
     flex: 1;
+    font-size: 1rem;
     h1,
     h2,
     h3,
@@ -118,11 +114,21 @@ code {
       clear: both;
       padding: 0 24px;
     }
+    code {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      color: #777777;
+    }
   }
   &__code {
     flex: 1;
     overflow: hidden;
     color: white;
+
+    code {
+      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+    }
   }
 
   &--fill {
@@ -140,6 +146,10 @@ $mobile: 800px;
   .section {
     flex-direction: column;
     &__content {
+      pre {
+        padding: 10px 0;
+        margin: 0 20px;
+      }
     }
 
     &__code {
@@ -156,6 +166,10 @@ $mobile: 800px;
 @container (min-width: 800px) {
   .section {
     &__content {
+      pre {
+        padding: 10px 0;
+        margin: 0 20px;
+      }
     }
 
     &__code {
