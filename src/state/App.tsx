@@ -285,7 +285,7 @@ const state = from([1, 2, 3].values());
       </div>
       <div class="section">
         <div class="section__content">
-          <h1 id={"create-state"}>Diamond problem</h1>
+          <h1 id={"diamond-problem"}>Diamond problem</h1>
           {/* <h2>
             <a href="https://stackblitz.com/edit/vitejs-vite-cxno2b">
               Live demo
