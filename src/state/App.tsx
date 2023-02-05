@@ -7,7 +7,7 @@ import benchmarkImg from "./assets/benchmark-results.png";
 import { Diamond } from "./demos/diamond";
 import logoUrl from "./assets/logo.webp";
 import * as Rx from "rxjs";
-import { from, fromAsyncIterable } from "@xania/state";
+import { from, fromAsyncIterable, State } from "@xania/state";
 import { ClickEvents } from "./demos/clicks";
 
 const jsx = jsxFactory({ classes });
@@ -162,21 +162,77 @@ function App() {
       <div class="section">
         <div class="section__content">
           <h1 id={"state-operators"}>State operators</h1>
-          <p>prop, map, bind</p>
+          <p>prop/pick, map, bind</p>
         </div>
         <div class="section__code"></div>
       </div>
       <div class="section">
         <div class="section__content">
-          <h2 id={"property-oprator"}>Property operator</h2>
-          <p>prop, map, bind</p>
+          <h2 id={"map-oprator"}>
+            <code>map</code> operator
+          </h2>
+          <Javascript>{`new State(new Date()).map((x) => x.toLocaleTimeString())`}</Javascript>
+          <p>
+            <Output>
+              {" "}
+              {new State(new Date()).map((x) => x.toLocaleTimeString())}
+            </Output>
+          </p>
         </div>
         <div class="section__code"></div>
       </div>
       <div class="section">
         <div class="section__content">
-          <h2 id={"create-state"}>Map operator</h2>
-          <p>prop, map, bind</p>
+          <h2 id={"property-operator"}>
+            <code>prop</code> operator
+          </h2>
+          <Javascript>
+            {`
+new State({ firstName: 'Ibrahim'}).prop('firstName')
+            `}
+          </Javascript>
+          <p>
+            <Output>
+              {" "}
+              {new State({ firstName: "Ibrahim" }).prop("firstName")}
+            </Output>
+          </p>
+        </div>
+        <div class="section__code"></div>
+      </div>
+      <div class="section">
+        <div class="section__content">
+          <h1 id={"event"}>Event</h1>
+          <p>
+            Event objects are a bit different that State objects in that they
+            dont have a state value. Mouse clicks is a good example of an event,
+            it does not hold a value but instead it describes the action that
+            lead to that event and it is only meaningful at a single point of
+            time, namely the moment the mouse was clicked.
+          </p>
+          <p>
+            The concept of Event is important, because it allows for building a
+            reactive system that does not require to have an initial value like
+            it is the case with only the State value.
+          </p>
+        </div>
+        <div class="section__code">
+          <Javascript>
+            {`
+const event = new Event<MouseEvent>();
+event.pick("target.value").bind(api.search)...
+            `}
+          </Javascript>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section__content">
+          <h1 id={"hot-and-cold"}>Hot vs Cold</h1>
+          <p>
+            This library is a pure Hot implementation of the Observable pattern,
+            meaning that a State object (or Event) are updated pushed based no
+            matter if there is someone listening or not.
+          </p>
         </div>
         <div class="section__code"></div>
       </div>
