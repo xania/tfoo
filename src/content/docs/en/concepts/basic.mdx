@@ -41,11 +41,94 @@ function Counter() {
 }
 ```
 
-`Counter` component already has a couple of interesting features. 
+`Counter` component already has a couple of interesting elements. 
 
 #### 1 state(...)
 
-First we create a state with initial value of `1`. Naming is hard, `count` is not exactly a state object in the traditional sense, we cannot just peek into it to see the latest value after incrementing the count a couple of times. The actual value is stored and maintained in the xania runtime. the only way to access it's value is using update messages
+```jsx
+  const count = state(1);
+```
+
+First we create a state with initial value of `1`. Naming is hard, `count` is not exactly a state object in the traditional sense, we cannot just peek into it to see the latest value after incrementing the count a couple of times. The actual value is stored and maintained in the xania runtime. the only way to access it's value is using update commands / messages
 
 #### 2 update(...)
-`button` Element binds the *click* event to the `increment` update message. Technically, `increment` is just a plain data object that describes how `count` change over time, it is also a special type of object that **xania** accepts in stead of a callback function like we saw before in *Hello World* example. When triggered, **xania** runtime will execute the `increment` to update the runtime state of the `count` and update the text content of the button accordingly. 
+```jsx
+  const increment = update(count, (x) => x + 1)
+```
+`button` Element binds the *click* event to the `increment` update command. Technically, `increment` is just a plain data object that describes how `count` change over time, it is also a special type of object which **Xania** accepts, instead of a callback function like we saw before in *Hello World* example.
+
+When triggered, **Xania** runtime will execute the `increment` to update the runtime state of the `count` and update the text content of the button accordingly. 
+
+### Derived / Computed state
+
+In the following example we map every count value to it's double and present that in the view.
+
+```jsx { 3 }
+function Component() {
+  const count = state(1)
+  const double = count.map(x => x * 2);
+  return (
+    <button click={update(count, x => x + 1)}>
+      Double: { double }
+    </button>
+  )
+}
+```
+
+### Async Components
+
+Let's say we have an api to *fetch* remote data.
+
+```typescript
+type Pokemon = { name: string }
+function fetchPokemon (id) { 
+  return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    .then(r => r.json())  as Promise<Pokemon>;
+}
+
+```
+
+In **Xania**, using async / await is not limited to only *server components*. 
+So we call `fetchPokemon` from inside our Component. We can do this because a *Function Component* is just a regular function that returns a view. In fact, calling `Pokemon({ id : 1})` is equivalent to `<Pokemon id={1}>`
+
+
+```jsx { 2 }
+async function Pokemon(props: { id }) {
+  const pokemon = await fetchPokemon(id)
+  return (
+    <h1>{ pokemon.name }</h1>
+  );
+}
+
+```
+
+### Putting it all together
+
+```jsx {5,11}
+async function Component() {
+  const pokemons = await fetchPokemons();
+
+  const id = state(1);
+  const pokemon = id.map(fetchPokemon);
+
+  return (
+    <h1>name: { pokemon.prop('name') }</h1>
+    <h2>weight: { pokemon.prop('weight') }</h2>
+    <button click={ id.update(
+        x => 1 + x % pokemons.length )}>
+      load next
+    </button>
+  )
+}
+
+function fetchPokemons() { 
+  return fetch('https://pokeapi.co/api/v2/pokemon/')
+    .then(e => e.json())
+    .then(data => data.results);
+}
+
+
+```
+
+In this example we assembled everything we have learned so far to load pokemon data based on a selected id. We also introduced a new state operartor `prop` which is a short hand for the `map` operator.
+
