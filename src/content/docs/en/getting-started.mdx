@@ -10,14 +10,18 @@ npm create xania
 
 <h2>What is Xania?</h2>
 
-Xania is javascript view library for building reactive UI with JSX syntax. 
+**Xania** is javascript view library for building reactive UI with JSX syntax. 
 
-## Key Features
-
-- **Blazingly fast:** The fastest implementation in the JavaScript framework benchmark.
-- **React interop:** Xania components integrates seemlessly in a react application.
-- **Fine-grained reactivity:** No rerender of the components. Supports observables (e.g. rxjs ) as input from outside world, and leverates (arrowized) frp for updating view on state change.
-- **Async everywhere:** First class support for async components or any part of it, async update messages, async derived state, etc.... 
+```jsx
+function HelloWorld(props: { name, children }) {
+  const { name } = props;
+  return (
+    <button click={() => log(`hello ${name}!`)}>
+      Say hello
+    </button>
+  );
+}
+```
 
 
 ## Create your first xania
@@ -36,19 +40,19 @@ Get a new Xania project up and running locally with our `create xania` CLI wizar
    with source code
   ```
 
+## Key Features
+
+🚀 **Blazingly fast:** The fastest implementation in the JavaScript framework benchmark.
+
+🔥 **React interop:** Xania components integrates seemlessly in a react application.
+
+😎  **Fine-grained reactivity:** No vdom / rerender of the components. Supports observables (e.g. rxjs ) as input from outside world to 
+listen to changes and pinpoint the DOM that needs to update without recreating the DOM.
+
+⏰ **Async everywhere:** First class support for async components or any part of it, async update commands, async derived state, async everything, etc.... 
+
+
 
 ## Learn Xania
 
-See examples of some of the key concepts and patterns of an Xania application!
-
-📚 Clock and time demo
-
-🧰 Diamond problem solutions
-
-📚 Forms (two-way-ish bindings)
-
-🧰 Animations (coming soon...)
-
-📚 Integration with Signalr
-
-*... find our full API documentation under the **Reference** tab.*
+Click on *Next Page* below to learn about the core concepts of **Xania**
