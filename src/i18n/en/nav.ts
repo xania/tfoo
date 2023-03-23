@@ -10,6 +10,6 @@
 export default [
 	{ text: 'Start Here', header: true, type: 'learn', key: 'startHere' },
 	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
-	{ text: 'Basic concepts', slug: 'concepts/basic', key: 'basic-concepts' },
+	{ text: 'Core concepts', slug: 'concepts/core', key: 'core-concepts' },
 	{ text: 'Work in progress', slug: 'work-in-progress', key: 'work-in-progress' },
 ] as const;
