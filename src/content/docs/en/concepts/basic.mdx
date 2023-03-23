@@ -1,0 +1,51 @@
+---
+title: Basic concepts
+description: "Xania's basic concepts."
+i18nReady: true
+---
+
+**Function Components** are the building blocks of a xania application, they not only represents the structure of the DOM, but also contains (in terms of Elm) **commands** and **subscriptions**.
+
+### Hello world
+Let's first start with a static / stateless example
+
+```jsx
+function HelloWorld(props: { name, children }) {
+  const { name } = props;
+  return (
+    <button click={() => log(`hello ${name}!`)}>
+      Say hello
+    </button>
+  );
+}
+```
+
+JSX in **xania** looks much like **react**, props defines attributes and children (not used in this example) and `click` event is bound to a callback function which prints a log message to the console.
+
+Next example will shows an example of dynamic Component, that is, view that depends on state that change over time.
+
+### Counter Example
+
+```jsx
+function Counter() {
+  // 1 state
+  const count = state(1);
+  // 2 update
+  const increment = update(count, (x) => x + 1)
+  // 3 view
+  return (
+    <button click={increment}>
+      Count: { count }
+    </button>
+  );
+}
+```
+
+`Counter` component already has a couple of interesting features. 
+
+#### 1 state(...)
+
+First we create a state with initial value of `1`. Naming is hard, `count` is not exactly a state object in the traditional sense, we cannot just peek into it to see the latest value after incrementing the count a couple of times. The actual value is stored and maintained in the xania runtime. the only way to access it's value is using update messages
+
+#### 2 update(...)
+`button` Element binds the *click* event to the `increment` update message. Technically, `increment` is just a plain data object that describes how `count` change over time, it is also a special type of object that **xania** accepts in stead of a callback function like we saw before in *Hello World* example. When triggered, **xania** runtime will execute the `increment` to update the runtime state of the `count` and update the text content of the button accordingly. 

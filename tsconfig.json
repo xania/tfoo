@@ -1,17 +1,14 @@
-﻿{
+{
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "noEmit": true,
-    "target": "ESNext",
-    "jsxFactory": "jsx.createElement",
-    "jsx": "react",
-    "jsxFragmentFactory": "jsx.createFragment",
-    "moduleResolution": "node",
-    "module": "ESNext",
-    "typeRoots": ["./types", "./packages/view/types"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": ".",
     "paths": {
-      "@xania/view": ["./packages/view/lib/index.ts"],
-      "@xania/state": ["./packages/state/lib/index.ts"]
+      "~/*": ["src/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   }
 }

@@ -1,6 +1,0 @@
-[submodule "packages/state"]
-	path = packages/state
-	url = https://github.com/xania/state
-[submodule "packages/view"]
-	path = packages/view
-	url = https://github.com/xania/view
