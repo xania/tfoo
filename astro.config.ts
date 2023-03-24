@@ -16,6 +16,8 @@ import { rehypeTasklistEnhancer } from './plugins/rehype-tasklist-enhancer';
 import { remarkFallbackLang } from './plugins/remark-fallback-lang';
 import { theme } from './syntax-highlighting-theme';
 
+import xania from './integrations/xania';
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://docs.astro.build/',
@@ -28,6 +30,7 @@ export default defineConfig({
 		astroAsides(),
 		astroCodeSnippets(),
 		mdx(),
+		xania(),
 	],
 	markdown: {
 		syntaxHighlight: 'shiki',

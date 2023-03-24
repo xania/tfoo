@@ -3,6 +3,11 @@ title: Core concepts
 description: "Xania's core concepts."
 i18nReady: true
 ---
+import { Counter } from "~/components/xania/Counter";
+import { HelloWorld } from "~/components/xania/HelloWorld";
+import { DoubleCounter } from "~/components/xania/DoubleCounter";
+import { PokemonProfile } from  "~/components/xania/PokemonProfile";
+import { PokemonApp } from "~/components/xania/PokemonApp";
 
 **Function Components** are the building blocks of a xania application. They not only represents  the structure of the DOM, but also contains **commands** and **subscriptions**. In the following examples we will gradually learn about each these concepts.
 
@@ -10,7 +15,7 @@ i18nReady: true
 Let's first start with a static / stateless example
 
 ```jsx
-function HelloWorld(props: { name, children }) {
+function HelloWorld(props: { name }) {
   const { name } = props;
   return (
     <button click={() => log(`hello ${name}!`)}>
@@ -19,6 +24,7 @@ function HelloWorld(props: { name, children }) {
   );
 }
 ```
+<HelloWorld name="Ibrahim" client:only="xania"  />
 
 JSX in **xania** looks much like **react**, props defines attributes and children (not used in this example) and `click` event is bound to a callback function which prints a log message to the console.
 
@@ -31,7 +37,7 @@ function Counter() {
   // 1 state
   const count = state(1);
   // 2 update
-  const increment = update(count, (x) => x + 1)
+  const increment = count.update((x) => x + 1)
   // 3 view
   return (
     <button click={increment}>
@@ -40,6 +46,7 @@ function Counter() {
   );
 }
 ```
+<Counter client:only="xania"  />
 
 `Counter` component already has a couple of interesting elements. 
 
@@ -74,6 +81,7 @@ function Component() {
   )
 }
 ```
+<DoubleCounter client:only="xania"  />
 
 ### Async Components
 
@@ -96,11 +104,21 @@ So we call `fetchPokemon` from inside our Component. We can do this because a *F
 async function Pokemon(props: { id }) {
   const pokemon = await fetchPokemon(id)
   return (
-    <h1>{ pokemon.name }</h1>
+    <>
+      <div>
+        <b>{pokemon.name}</b>
+      </div>
+      <div>
+        {abilities.map((a) => (
+          <li>{a.name}</li>
+        ))}
+      </div>
+    </>
   );
 }
 
 ```
+<PokemonProfile id="ditto" client:only="xania"  />
 
 ### Putting it all together
 
@@ -127,8 +145,9 @@ function fetchPokemons() {
     .then(data => data.results);
 }
 
-
 ```
+
+<PokemonApp client:only="xania"  />
 
 In this example we assembled everything we have learned so far to load pokemon data based on a selected id. We also introduced a new state operartor `prop` which is a short hand for the `map` operator.
 

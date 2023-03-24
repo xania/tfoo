@@ -1,0 +1,8 @@
+﻿{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@xania/view",
+    "target": "ESNext",
+    "moduleResolution": "node"
+  }
+}
