@@ -3,11 +3,11 @@ title: Core concepts
 description: "Xania's core concepts."
 i18nReady: true
 ---
-import { Counter } from "~/components/xania/Counter";
-import { HelloWorld } from "~/components/xania/HelloWorld";
-import { DoubleCounter } from "~/components/xania/DoubleCounter";
-import { PokemonProfile } from  "~/components/xania/PokemonProfile";
-import { PokemonApp } from "~/components/xania/PokemonApp";
+import { Counter } from "~/xania/Counter";
+import { HelloWorld } from "~/xania/HelloWorld";
+import { DoubleCounter } from "~/xania/DoubleCounter";
+import { PokemonProfile } from  "~/xania/PokemonProfile";
+import { PokemonApp } from "~/xania/PokemonApp";
 
 **Function Components** are the building blocks of a xania application. They not only represents  the structure of the DOM, but also contains **commands** and **subscriptions**. In the following examples we will gradually learn about each these concepts.
 
@@ -122,7 +122,7 @@ async function Pokemon(props: { id }) {
 
 ### Putting it all together
 
-```jsx {5,11}
+```jsx {2, 5}
 async function Component() {
   const pokemons = await fetchPokemons();
 
@@ -130,12 +130,14 @@ async function Component() {
   const pokemon = id.map(fetchPokemon);
 
   return (
-    <h1>name: { pokemon.prop('name') }</h1>
-    <h2>weight: { pokemon.prop('weight') }</h2>
-    <button click={ id.update(
-        x => 1 + x % pokemons.length )}>
-      load next
-    </button>
+    <>
+			<div>
+				<b>{pokemon.prop('name')}</b>
+			</div>
+			<div>weight: {pokemon.prop('weight')}</div>
+			<button click={
+        id.update((x) => x + 1)}>load next</button>
+    </>
   )
 }
 

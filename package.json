@@ -95,7 +95,7 @@
     "@babel/plugin-transform-react-jsx": "^7.21.0",
     "@fontsource/ibm-plex-mono": "^4.5.10",
     "@nanostores/preact": "^0.1.3",
-    "@xania/view": "0.5.2",
+    "@xania/view": "alpha",
     "canvas-confetti": "^1.6.0",
     "jsdoc-api": "^7.1.1",
     "nanostores": "^0.5.13",

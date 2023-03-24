@@ -12,8 +12,10 @@ export async function PokemonApp() {
 
 	return (
 		<DemoContainer>
-			<div>{pokemon}</div>
-			<div>name: {pokemon.prop('name')}</div>
+			<div>
+				<b>{pokemon.prop('name')}</b>
+			</div>
+			<div>weight: {pokemon.prop('weight')}</div>
 			<button click={id.update((x) => x + 1)}>load next</button>
 		</DemoContainer>
 	);

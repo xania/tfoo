@@ -6,7 +6,7 @@ export function HelloWorld(props: { name }) {
 	const { name } = props;
 	return (
 		<DemoContainer>
-			<button click={() => console.log(`hello ${name}!`)}>Say hello</button>
+			<button click={() => window.alert(`hello ${name}!`)}>Say hello</button>
 		</DemoContainer>
 	);
 }
