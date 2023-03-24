@@ -20,6 +20,11 @@ import xania from './integrations/xania';
 
 // https://astro.build/config
 export default defineConfig({
+	server: {
+		host: '0.0.0.0',
+		hmr: false,
+	},
+	build: {},
 	site: 'https://docs.astro.build/',
 	integrations: [
 		AutoImport({
@@ -52,4 +57,4 @@ export default defineConfig({
 			rehypei18nAutolinkHeadings(),
 		],
 	},
-});
+} as any);
