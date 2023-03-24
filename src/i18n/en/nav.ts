@@ -10,6 +10,21 @@
 export default [
 	{ text: 'Start Here', header: true, type: 'learn', key: 'startHere' },
 	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
-	{ text: 'Core concepts', slug: 'concepts/core', key: 'core-concepts' },
-	{ text: 'Work in progress', slug: 'work-in-progress', key: 'work-in-progress' },
+
+	{
+		text: 'Core concepts',
+		header: true,
+		type: 'learn',
+		key: 'core-concepts',
+	},
+	{ text: 'Pokemon', slug: 'concepts/pokemon-intro', key: 'pokemon-intro' },
+	{
+		text: 'Events',
+		slug: 'concepts/events',
+		key: 'events',
+	},
+	{ text: 'State values', slug: 'concepts/state', key: 'state' },
+	{ text: 'Derived state', slug: 'concepts/derived-state', key: 'derived-state' },
+	{ text: 'Async / Await', slug: 'concepts/async-await', key: 'async-await' },
+	{ text: 'The App', slug: 'concepts/pokemon-app', key: 'pokemon-app' },
 ] as const;

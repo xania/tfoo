@@ -1,0 +1,30 @@
+---
+title: Core concepts
+description: "Xania's core concepts."
+i18nReady: true
+---
+import { Counter } from "~/xania/Counter";
+import { HelloWorld } from "~/xania/HelloWorld";
+import { DoubleCounter } from "~/xania/DoubleCounter";
+import { PokemonProfile } from  "~/xania/PokemonProfile";
+import { PokemonApp } from "~/xania/PokemonApp";
+
+**Function Components** are the building blocks of a xania application. They not only represents  the structure of the DOM, but also contains **commands** and **subscriptions**. In the following examples we will gradually learn about each these concepts.
+
+### Hello world
+Let's first start with a static / stateless example
+
+```jsx
+function HelloWorld(props: { name }) {
+  const { name } = props;
+  return (
+    <button click={() => log(`hello ${name}!`)}>
+      Say hello
+    </button>
+  );
+}
+```
+
+<HelloWorld name="Xania" client:only="xania"  />
+
+JSX in **xania** looks much like **react**, props defines attributes and children (not used in this example) and `click` event is bound to a callback function which prints a log message to the console.

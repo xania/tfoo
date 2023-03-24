@@ -23,4 +23,20 @@
 	button {
 		cursor: pointer;
 	}
+
+	a {
+		padding: 0 6px;
+		margin: 2px 4px;
+		border: 1px solid gray;
+		color: white;
+		cursor: pointer;
+		background-color: rgb(59, 67, 139);
+	}
+
+	:global(.box) {
+		display: flex;
+		flex-wrap: wrap;
+		border: 1px solid gray;
+		padding: 10px;
+	}
 }

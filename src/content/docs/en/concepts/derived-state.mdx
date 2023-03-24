@@ -1,0 +1,28 @@
+---
+title: Derived / Computed state
+description: "Xania's core concepts."
+i18nReady: true
+---
+import { Counter } from "~/xania/Counter";
+import { HelloWorld } from "~/xania/HelloWorld";
+import { DoubleCounter } from "~/xania/DoubleCounter";
+import { PokemonProfile } from  "~/xania/PokemonProfile";
+import { PokemonApp } from "~/xania/PokemonApp";
+
+In the following example we map every count value to it's `double` and `triple` and show that in the view. Notice that `triple` is wrapped in a *Promise*. **Xania**'s runtime will automatically recognise this and await the result before showing the end value in the view. This is useful, as we will see in the next section, when we want to asynchronuously load data from an *API*
+
+```jsx { 3, 4 }
+function Component() {
+  const count = state(1)
+  const double = count.map(x => x * 2);
+  const triple = count.map(x => Promise.resolve(x * 3));
+  return (
+    <button click={update(count, x => x + 1)}>
+      Double: { double }
+      Triple: { triple }
+    </button>
+  )
+}
+```
+<DoubleCounter client:only="xania"  />
+

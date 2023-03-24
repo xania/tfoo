@@ -1,0 +1,17 @@
+---
+title: Pokemon app
+description: "Xania's core concepts."
+i18nReady: true
+---
+import { PokemonApp } from "~/xania/PokemonApp";
+
+In this example we assembled some of the core concepts of **Xania**. In the next sections we will learn about each concept separately. Or you could jump immediately to the final [final code](../pokemon-app) if you are confident you can infer how it works from the implementation.
+
+Notice that when you click many times, then the UI is not responding for the duration of clicks. This is because **Xania** keeps track of the pending clicks and invalidates it automatically when new click is received. In Rxjs this is achieved using **switchMap** operator, but in **Xania** it is the default behavior.
+
+```jsx
+<PokemonApp client:only="xania"  />
+```
+
+<PokemonApp client:only="xania"  />
+

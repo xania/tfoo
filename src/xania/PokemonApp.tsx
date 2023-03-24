@@ -5,10 +5,8 @@ import { DemoContainer } from './DemoContainer';
 export async function PokemonApp() {
 	const pokemons = await fetchPokemons();
 
-	const id = state(1);
+	const id = state(pokemons[0].name);
 	const pokemon = id.map(fetchPokemon);
-
-	console.log(pokemons.length);
 
 	return (
 		<DemoContainer>
@@ -16,7 +14,11 @@ export async function PokemonApp() {
 				<b>{pokemon.prop('name')}</b>
 			</div>
 			<div>weight: {pokemon.prop('weight')}</div>
-			<button click={id.update((x) => x + 1)}>load next</button>
+			<div class="box">
+				{pokemons.map((p) => (
+					<a click={id.update(() => p.name)}>{p.name}</a>
+				))}
+			</div>
 		</DemoContainer>
 	);
 }
@@ -24,7 +26,7 @@ export async function PokemonApp() {
 function fetchPokemons() {
 	return fetch('https://pokeapi.co/api/v2/pokemon/')
 		.then((e) => e.json())
-		.then((data) => data.results);
+		.then((data) => data.results) as Promise<Pokemon[]>;
 }
 type Pokemon = { name: string; weight: number; abilities: { ability: { name: string } }[] };
 function fetchPokemon(id) {

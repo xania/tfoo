@@ -1,0 +1,47 @@
+---
+title: Pokemon App
+description: "Xania's core concepts."
+i18nReady: true
+---
+import { Counter } from "~/xania/Counter";
+import { HelloWorld } from "~/xania/HelloWorld";
+import { DoubleCounter } from "~/xania/DoubleCounter";
+import { PokemonProfile } from  "~/xania/PokemonProfile";
+import { PokemonApp } from "~/xania/PokemonApp";
+
+In this example we assembled everything we have learned so far to first, load pokemon list to show in selection box and second, when user clicks on a pokemon item then the corresponding details are asynchronuously loaded from the pokemon api. 
+
+We also introduced a new state operartor `prop` which is a short hand for the `map` operator.
+
+```jsx {2, 5}
+async function Component() {
+	const pokemons = await fetchPokemons();
+
+	const name = state(pokemons[0].name);
+	const pokemon = name.map(fetchPokemon);
+
+  return (
+    <>
+			<div>
+				<b>{pokemon.prop('name')}</b>
+			</div>
+			<div>weight: {pokemon.prop('weight')}</div>
+			<div class="box">
+				{pokemons.map((p) => (
+					<a click={name.update(() => p.name)}>{p.name}</a>
+				))}
+			</div>
+    </>
+  )
+}
+
+function fetchPokemons() { 
+  return fetch('https://pokeapi.co/api/v2/pokemon/')
+    .then(e => e.json())
+    .then(data => data.results);
+}
+
+```
+
+<PokemonApp client:only="xania"  />
+

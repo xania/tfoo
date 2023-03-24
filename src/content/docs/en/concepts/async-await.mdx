@@ -1,0 +1,46 @@
+---
+title: Async Components
+description: "Xania's core concepts."
+i18nReady: true
+---
+import { Counter } from "~/xania/Counter";
+import { HelloWorld } from "~/xania/HelloWorld";
+import { DoubleCounter } from "~/xania/DoubleCounter";
+import { PokemonProfile } from  "~/xania/PokemonProfile";
+import { PokemonApp } from "~/xania/PokemonApp";
+
+In **Xania**, using async / await is not limited to only *server components*. 
+In the following example we call `fetchPokemon` from inside our Component. We can do this because a *Function Component* is just a regular function that happens to returns a view. In fact, calling `Pokemon({ id : 1})` is equivalent to `<Pokemon id={1}>`
+
+
+```jsx { 2 }
+async function Pokemon(props: { id }) {
+  const pokemon = await fetchPokemon(id)
+  return (
+    <>
+      <div>
+        <b>{pokemon.name}</b>
+      </div>
+      <div>
+        {abilities.map((a) => (
+          <li>{a.name}</li>
+        ))}
+      </div>
+    </>
+  );
+}
+
+```
+<PokemonProfile id="ditto" client:only="xania"  />
+
+And for completeness here is the implementation of fetchPokemon we used above
+
+```typescript
+type Pokemon = { name: string }
+function fetchPokemon (id) { 
+  return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    .then(r => r.json())  as Promise<Pokemon>;
+}
+
+```
+
