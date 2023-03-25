@@ -27,4 +27,12 @@ export default [
 	{ text: 'Derived state', slug: 'concepts/derived-state', key: 'derived-state' },
 	{ text: 'Async / Await', slug: 'concepts/async-await', key: 'async-await' },
 	{ text: 'The App', slug: 'concepts/pokemon-app', key: 'pokemon-app' },
+
+	{
+		text: 'Coming soon',
+		header: true,
+		type: 'learn',
+		key: 'coming-soon',
+	},
+	{ text: 'Control flow', slug: 'concepts/control-flow', key: 'control-flow' },
 ] as const;
