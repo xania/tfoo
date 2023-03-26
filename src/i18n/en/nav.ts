@@ -12,7 +12,7 @@ export default [
 	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
 
 	{
-		text: 'Core concepts',
+		text: 'Case study',
 		header: true,
 		type: 'learn',
 		key: 'core-concepts',
