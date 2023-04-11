@@ -10,12 +10,13 @@
 export default [
 	{ text: 'Start Here', header: true, type: 'learn', key: 'startHere' },
 	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
+	{ text: 'Introduction', slug: 'introduction', key: 'introduction' },
 
 	{
 		text: 'Case study',
 		header: true,
 		type: 'learn',
-		key: 'core-concepts',
+		key: 'case-study',
 	},
 	{ text: 'Pokemon', slug: 'concepts/pokemon-intro', key: 'pokemon-intro' },
 	{
@@ -29,10 +30,51 @@ export default [
 	{ text: 'The App', slug: 'concepts/pokemon-app', key: 'pokemon-app' },
 
 	{
-		text: 'Coming soon',
+		text: 'Components',
+		header: true,
+		type: 'api',
+		key: 'components',
+	},
+	{ text: 'JSX', slug: 'components/jsx', key: 'jsx' },
+	{ text: 'Without JSX', slug: 'components/no-jsx', key: 'no-jsx' },
+	{ text: 'State', slug: 'components/state', key: 'state' },
+	{ text: 'Async components', slug: 'components/async-components', key: 'async-components' },
+	{ text: 'If expression', slug: 'components/if-expression', key: 'if-expression' },
+	{ text: 'List', slug: 'components/list', key: 'list' },
+	{ text: 'Async state', slug: 'components/state', key: 'async-state' },
+	{ text: 'Commands', slug: 'components/commands', key: 'commands' },
+	{ text: 'Subscriptions', slug: 'components/subscriptions', key: 'subscriptions' },
+	{ text: 'Headless components', slug: 'components/headless', key: 'headless' },
+
+	{
+		text: 'Integrations',
 		header: true,
 		type: 'learn',
-		key: 'coming-soon',
+		key: 'advanced-concepts',
 	},
-	{ text: 'Control flow', slug: 'concepts/control-flow', key: 'control-flow' },
+	{ text: 'React', slug: 'integrations/react', key: 'react' },
+	{ text: 'Tailwind css', slug: 'integrations/tailwindcss', key: 'tailwindcss' },
+	{ text: 'Animations', slug: 'integrations/animations', key: 'animations' },
+
+	{
+		text: 'Router',
+		header: true,
+		type: 'api',
+		key: 'reactivity',
+	},
+	{ text: 'WebApp', slug: 'router/webapp', key: 'web-app' },
+	{ text: 'Route', slug: 'router/route', key: 'Route' },
+	{ text: 'Link', slug: 'router/link', key: 'link' },
+	{ text: 'Nested router', slug: 'router/nested-router', key: 'nested-router' },
+
+	{
+		text: 'Architecture',
+		header: true,
+		type: 'learn',
+		key: 'advanced-concepts',
+	},
+	{ text: 'Overview', slug: 'architecture/overview', key: 'overview' },
+	{ text: 'Reactivity', slug: 'architecture/reactivity', key: 'control-flow' },
+	{ text: 'Performance', slug: 'architecture/performance', key: 'performance' },
+	{ text: 'Composability API', slug: 'architecture/composability-api', key: 'composability-api' },
 ] as const;
