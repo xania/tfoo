@@ -9,8 +9,8 @@
  */
 export default [
 	{ text: 'Start Here', header: true, type: 'learn', key: 'startHere' },
-	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
 	{ text: 'Introduction', slug: 'introduction', key: 'introduction' },
+	{ text: 'Getting Started', slug: 'getting-started', key: 'getting-started' },
 
 	{
 		text: 'Case study',

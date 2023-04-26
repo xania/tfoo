@@ -4,26 +4,11 @@ description: A basic intro to Xania.
 i18nReady: true
 ---
 
+The default project template includes a set of examples that helps you understand how to use xania in most effective way.
+
 :::tip[quick start]
 npm create xania
 :::
-
-The default project template includes a set of examples that helps you understand how to use xania in most effective way. Removing the examples from you local copy is simply done by deleting the `examples` folder which will also remove all the dependencies that comes with those examples.
-
-<h2>What is Xania?</h2>
-
-**Xania** is (just like react) a javascript view library for building reactive UI with JSX syntax. A typical component in xania has props (properties), a view and event handlers.
-
-```jsx
-function HelloWorld(props: { name, children }) {
-  const { name } = props;
-  return (
-    <button click={() => log(`hello ${name}!`)}>
-      Say hello
-    </button>
-  );
-}
-```
 
 
 ## Create your first xania
@@ -41,18 +26,6 @@ Get a new Xania project up and running locally with our `create xania` CLI wizar
  > install from npm
    with source code
   ```
-
-## Key Features
-
-🚀 **Blazingly fast:** The fastest implementation in the JavaScript framework benchmark.
-
-🔥 **React interop:** Xania components integrates seemlessly in a react application.
-
-😎  **Fine-grained reactivity:** No vdom / rerender of the components. Supports observables (e.g. rxjs ) as input from outside world to 
-listen to changes and pinpoint the DOM that needs to update without recreating the DOM.
-
-⏰ **Async everywhere:** First class support for async components or any part of it, async update commands, async derived state, async everything, etc.... 
-
 
 
 ## Learn Xania

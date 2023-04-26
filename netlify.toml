@@ -24,7 +24,7 @@
     to = "/en/concepts/islands"
 
   [[redirects]]
-    from = "/en/getting-started/quick-start"
+    from = "/en/introduction"
     to = "/en/install/auto"
 
   [[redirects]]

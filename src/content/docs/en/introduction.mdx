@@ -1,0 +1,31 @@
+---
+title: What is Xania?
+description: A basic intro to Xania.
+i18nReady: true
+---
+
+**Xania** is (just like react) a javascript view library for building reactive UI with JSX syntax. A typical component in xania has props (properties), a view and event handlers. Unlinke React, client components can be async. Other differences comes from fine-grained reactivity in Xania.
+
+```jsx
+async function HelloWorld(props: { children }) {
+  const { name } = await fetchProfile();
+  return (
+    <button click={() => log(`hello ${name}!`)}>
+      Say hello
+    </button>
+  );
+}
+```
+
+
+## Key Features
+
+🚀 **Blazingly fast:** The fastest implementation in the JavaScript framework benchmark.
+
+🔥 **React interop:** Xania components integrates seemlessly in a react application.
+
+😎  **Fine-grained reactivity:** No vdom / rerender of the components. Supports observables (e.g. rxjs ) as input from outside world to 
+listen to changes and pinpoint the DOM that needs to update without recreating the DOM.
+
+⏰ **Async everywhere:** First class support for async components or any part of it, async update commands, async derived state, async everything, etc.... 
+
