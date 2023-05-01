@@ -1,4 +1,4 @@
-﻿import { state } from '@xania/view';
+﻿import { state } from 'xania';
 import { DemoContainer } from './DemoContainer';
 
 export function Counter() {

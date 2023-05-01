@@ -1,4 +1,4 @@
-﻿import '@xania/view';
+﻿import 'xania';
 import { DemoContainer } from './DemoContainer';
 
 export function HelloWorld(props: { name }) {

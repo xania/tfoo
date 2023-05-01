@@ -1,4 +1,4 @@
-﻿import '@xania/view';
+﻿import 'xania';
 
 import classes from './DemoContainer.module.scss';
 

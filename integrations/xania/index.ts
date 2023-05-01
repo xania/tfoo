@@ -1,12 +1,12 @@
 ﻿import type { AstroIntegration } from 'astro';
-// import * as xn from '@xania/view';
+// import * as xn from 'xania';
 
 function getRenderer() {
 	return {
 		name: 'xania',
 		clientEntrypoint: './integrations/xania/client.ts',
 		serverEntrypoint: './integrations/xania/server.ts',
-		jsxImportSource: '@xania/view',
+		jsxImportSource: 'xania',
 		jsxTransformOptions: async () => {
 			// @ts-expect-error types not found
 			const babelPluginTransformReactJsxModule = await import('@babel/plugin-transform-react-jsx');
@@ -19,7 +19,7 @@ function getRenderer() {
 						{},
 						{
 							runtime: 'automatic',
-							importSource: '@xania/view',
+							importSource: 'xania',
 						}
 					),
 				],
@@ -31,10 +31,10 @@ function getRenderer() {
 function getViteConfiguration() {
 	return {
 		optimizeDeps: {
-			include: ['@xania/view', '@xania/view/jsx-runtime', '@xania/view/jsx-dev-runtime'],
+			include: ['xania', 'xania/jsx-runtime', 'xania/jsx-dev-runtime'],
 		},
 		resolve: {
-			dedupe: ['@xania/view'],
+			dedupe: ['xania'],
 		},
 		ssr: {
 			// external: ['react-dom/server.js', 'react-dom/client.js'],

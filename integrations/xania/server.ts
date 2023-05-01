@@ -1,4 +1,4 @@
-﻿// import * as xn from '@xania/view';
+﻿// import * as xn from 'xania';
 
 export default {
 	check(Component: unknown) {
