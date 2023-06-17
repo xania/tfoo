@@ -9,7 +9,7 @@ import { DoubleCounter } from "~/xania/DoubleCounter";
 import { PokemonProfile } from  "~/xania/PokemonProfile";
 import { PokemonApp } from "~/xania/PokemonApp";
 
-Next example will shows an example of dynamic view that depends on state that change over time. the changes are initiated via the click event.
+The next example will show an example of a dynamic view that depends on state that changes over time. The changes are initiated via the click event.
 
 ```jsx
 function Counter() {
@@ -33,13 +33,13 @@ function Counter() {
   const count = state(1);
 ```
 
-First we create a state with initial value of `1`. Naming is hard, `count` is not exactly a state object in the traditional sense, we cannot just peek into it to see the latest value after incrementing the count a couple of times. The actual value is stored and maintained in the xania runtime. the only way to access it's value is using update commands / messages
+First we create a state with initial value of `1`. Naming is hard, `count` is not exactly a state object in the traditional sense, we cannot just peek into it to see the latest value after incrementing the count a couple of times. The actual value is stored and maintained in the **Xania** runtime. The only way to access its value is by using update commands / messages
 
 #### 2 update(...)
 ```jsx
   const increment = update(count, (x) => x + 1)
 ```
-`button` Element binds the *click* event to the `increment` update command. Technically, `increment` is just a plain data object that describes how `count` change over time, it is also a special type of object which **Xania** accepts, instead of a callback function like we saw before in *Hello World* example.
+The `button` Element binds the *click* event to the `increment` update command. Technically, `increment` is just a plain data object that describes how `count` changes over time, it is also a special type of object which **Xania** accepts, instead of a callback function like we saw before in *Hello World* example.
 
-When triggered, **Xania** runtime will execute the `increment` to update the runtime state of the `count` and update the text content of the button accordingly. 
+When triggered, the **Xania** runtime will execute the `increment` to update the runtime state of the `count` and update the text content of the button accordingly. 
 
