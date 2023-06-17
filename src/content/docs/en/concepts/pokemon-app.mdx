@@ -9,9 +9,12 @@ import { DoubleCounter } from "~/xania/DoubleCounter";
 import { PokemonProfile } from  "~/xania/PokemonProfile";
 import { PokemonApp } from "~/xania/PokemonApp";
 
-In this example we assembled everything we have learned so far to first, load pokemon list to show in selection box and second, when user clicks on a pokemon item then the corresponding details are asynchronuously loaded from the pokemon api. 
+In this example we assemble everything we've learned so far to:
 
-We also introduced a new state operartor `prop` which is a short hand for the `map` operator.
+1. load and show a Pokemon list as part of a select box, and
+2. when the user clicks on a Pokemon item, asynchronously load the corresponding details from the pokemon api. 
+
+We also introduced a new state operator, `prop`, which is shorthand for the `map` operator.
 
 ```jsx {2, 5}
 async function Component() {

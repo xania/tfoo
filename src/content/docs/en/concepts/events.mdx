@@ -9,7 +9,7 @@ import { DoubleCounter } from "~/xania/DoubleCounter";
 import { PokemonProfile } from  "~/xania/PokemonProfile";
 import { PokemonApp } from "~/xania/PokemonApp";
 
-**Function Components** are the building blocks of a xania application. They not only represents  the structure of the DOM, but also contains **commands** and **subscriptions**. In the following examples we will gradually learn about each these concepts.
+**Function Components** are the building blocks of a xania application. They not only represent the structure of the DOM, but also contain **commands** and **subscriptions**. In the following examples we will gradually learn about each these concepts.
 
 ### Hello world
 Let's first start with a static / stateless example
@@ -27,4 +27,4 @@ function HelloWorld(props: { name }) {
 
 <HelloWorld name="Xania" client:only="xania"  />
 
-JSX in **xania** looks much like **react**, props defines attributes and children (not used in this example) and `click` event is bound to a callback function which prints a log message to the console.
+JSX in **Xania** looks much like **React**: props defines attributes and children (not used in this example), and the `click` event is bound to a callback function which prints a log message to the console.
